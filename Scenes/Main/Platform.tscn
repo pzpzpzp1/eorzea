@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://iwmpe20mqnww"]
+
+[ext_resource type="Script" path="res://Scenes/Main/Platform.gd" id="1_aykfa"]
+
+[node name="Platform" type="Node2D"]
+script = ExtResource("1_aykfa")
+
+[node name="PlatformSprite2D" type="Sprite2D" parent="."]

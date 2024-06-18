@@ -5,8 +5,10 @@ extends Control
 @onready var rolelist = $RoleVBoxContainer
 @onready var rolechoice = $RoleOptionsButton
 @onready var linecontainer = $Container
+@onready var MechanicOptions = $MechanicOptionsButton
+@onready var status_text = $StatusLabel
 
-
+var mechanics = ["randomBS"]
 var light_party_roles = ["T1","H1","M1","R1"]
 var full_party_roles = ["T1","T2","H1","H2","M1","M2","R1","R2"]
 
@@ -16,10 +18,19 @@ var player_roles = {}
 var party_type = -1
 var player_labels = {}
 
+var Enums = preload("res://Scenes/Main/Enums.gd")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if multiplayer.is_server():
 		start_button.disabled = false
+	else:
+		start_button.hide()
+	
+	for mechanic_index in mechanics.size():
+		var mechanic = mechanics[mechanic_index]
+		MechanicOptions.add_item(mechanic, mechanic_index)
+	MechanicOptions.select(-1)
 	
 func set_party_type(id):
 	party_type = id
@@ -98,11 +109,64 @@ func _on_role_options_button_item_selected(index):
 
 @rpc("any_peer", "call_remote")
 func inform_role_choice(chooser_id, choice):
-# TODO: hook up to ui
 	print(player_names[str(player_ids[0])] + " acknowledges " + player_names[str(chooser_id)] + " chose role " + str(choice))
 	player_roles[str(chooser_id)] = choice
+	
 	draw_roles()
 
-func _on_start_button_button_down():
-	pass # Replace with function body.
+func _set_status(text):
+	status_text.set_text("Status: " + text)
 
+func has_duplicates(int_list):
+	var seen = {}
+	for num in int_list:
+		if num in seen:
+			return true  # Duplicate found
+		seen[num] = true
+	return false  # No duplicates
+
+func _on_start_button_button_down():
+	# make sure mechanic to practice is chosen
+	if MechanicOptions.get_selected_id() == -1:
+		_set_status("Choose a mechanic to practice.")
+		return
+
+	# make sure all players have picked roles
+	var selected_roles = []
+	for id in player_ids:
+		if player_roles[str(id)] == -1:
+			_set_status("All players must choose a role.")
+			return
+		selected_roles.append(player_roles[str(id)])
+	if has_duplicates(selected_roles):
+		_set_status("No duplicate roles allowed.")
+		return
+	
+	# make sure all roles are chosen only once
+	for id in player_ids:
+		if player_roles[str(id)] == -1:
+			_set_status("All players must choose a role.")
+			return
+			
+	var player_role_enum_dict = resolve_player_role_enums(player_roles, party_type)
+	
+	# initialize next scene
+	var platform = load("res://Scenes/Main/Platform.tscn").instantiate()
+	get_tree().get_root().add_child(platform)
+	platform.initialize(player_ids, player_names, player_role_enum_dict)
+	platform.show()
+	hide()
+
+func resolve_player_role_enums(player_roles, party_type):
+	assert(party_type != -1)
+	var roles = []
+	if party_type==0:
+		roles = light_party_roles
+	else:
+		roles = full_party_roles
+	var player_role_enums = {}
+	for pid_key in player_roles:
+		var prole = player_roles[pid_key]
+		player_role_enums[pid_key] = Enums.string_to_enum(roles[prole], Enums.Roles)
+	return player_role_enums
+	

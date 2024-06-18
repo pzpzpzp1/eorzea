@@ -9,71 +9,86 @@ script = ExtResource("1_dk0xx")
 
 [node name="RoleOptionsButton" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 206.0
-offset_top = 73.0
-offset_right = 275.0
-offset_bottom = 113.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 104.0
 
 [node name="StatusLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 81.0
-offset_top = 581.0
-offset_right = 139.0
-offset_bottom = 604.0
+offset_left = 64.0
+offset_top = 448.0
+offset_right = 122.0
+offset_bottom = 471.0
 text = "Status: "
 
 [node name="MyRoleLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 209.0
-offset_top = 46.0
-offset_right = 271.0
-offset_bottom = 69.0
+offset_left = 64.0
+offset_top = 40.0
+offset_right = 128.0
+offset_bottom = 63.0
 text = "My Role"
 
 [node name="RoleVBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 220.0
-offset_top = 240.0
-offset_right = 260.0
-offset_bottom = 280.0
+offset_left = 64.0
+offset_top = 216.0
+offset_right = 104.0
+offset_bottom = 256.0
 alignment = 2
 
 [node name="PlayersLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 580.0
-offset_top = 200.0
-offset_right = 637.0
-offset_bottom = 223.0
+offset_left = 192.0
+offset_top = 168.0
+offset_right = 328.0
+offset_bottom = 191.0
 text = "Players (You first)"
 
 [node name="RolesLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 219.0
-offset_top = 204.0
-offset_right = 261.0
-offset_bottom = 227.0
+offset_left = 64.0
+offset_top = 168.0
+offset_right = 106.0
+offset_bottom = 191.0
 text = "Roles"
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 420.0
-offset_top = 65.0
-offset_right = 523.0
-offset_bottom = 108.0
+offset_left = 472.0
+offset_top = 528.0
+offset_right = 575.0
+offset_bottom = 571.0
 disabled = true
 text = "Start"
 
 [node name="PlayerVBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 583.0
-offset_top = 237.0
-offset_right = 623.0
-offset_bottom = 280.0
+offset_left = 192.0
+offset_top = 216.0
+offset_right = 232.0
+offset_bottom = 256.0
 
 [node name="Container" type="Container" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="MechanicOptionsButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 104.0
+
+[node name="MechanicLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 40.0
+offset_right = 448.0
+offset_bottom = 63.0
+text = "Mechanic"
 
 [connection signal="item_selected" from="RoleOptionsButton" to="." method="_on_role_options_button_item_selected"]
 [connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
