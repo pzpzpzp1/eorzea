@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://4ct1gm6xra5q"]
+
+[ext_resource type="Script" path="res://Scenes/Main/Player.gd" id="1_v2ut8"]
+[ext_resource type="Texture2D" uid="uid://l0yg2xlny37c" path="res://Assets/Highlight.png" id="2_w1a0b"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6pevx"]
+load_path = "res://.godot/imported/icon.svg-8193eb3d66a1b5143b8bb4c28c1dc139.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ed5hf"]
+radius = 8.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_v2ut8")
+
+[node name="BodySprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CompressedTexture2D_6pevx")
+
+[node name="BodyCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ed5hf")
+
+[node name="BoldBorderSprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_w1a0b")

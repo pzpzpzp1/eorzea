@@ -24,8 +24,11 @@ var Enums = preload("res://Scenes/Main/Enums.gd")
 func _ready():
 	if multiplayer.is_server():
 		start_button.disabled = false
+		$MechanicOptionsButton.disabled = false
 	else:
 		start_button.hide()
+		$MechanicOptionsButton.hide()
+		$MechanicLabel.hide()
 	
 	for mechanic_index in mechanics.size():
 		var mechanic = mechanics[mechanic_index]
@@ -124,6 +127,16 @@ func has_duplicates(int_list):
 			return true  # Duplicate found
 		seen[num] = true
 	return false  # No duplicates
+	
+@rpc("any_peer", "call_remote")
+func start_game():
+	get_tree().get_root().get_child(0).is_game_started = true
+	#get_tree().get_root().get_child(0).peer.close() # no work :( 
+	var platform = load("res://Scenes/Main/Platform.tscn").instantiate()
+	get_tree().get_root().add_child(platform)
+	platform.initialize(player_ids, player_names, resolve_player_role_enums(player_roles, party_type))
+	platform.show()
+	hide()
 
 func _on_start_button_button_down():
 	# make sure mechanic to practice is chosen
@@ -148,15 +161,10 @@ func _on_start_button_button_down():
 			_set_status("All players must choose a role.")
 			return
 			
-	var player_role_enum_dict = resolve_player_role_enums(player_roles, party_type)
-	
 	# initialize next scene
-	var platform = load("res://Scenes/Main/Platform.tscn").instantiate()
-	get_tree().get_root().add_child(platform)
-	platform.initialize(player_ids, player_names, player_role_enum_dict)
-	platform.show()
-	hide()
-
+	rpc("start_game") # tell everyone else to start the game
+	start_game() # start the game
+	
 func resolve_player_role_enums(player_roles, party_type):
 	assert(party_type != -1)
 	var roles = []

@@ -12,6 +12,8 @@ var waitingroom = load("res://Scenes/Main/WaitingRoom.tscn").instantiate()
 @onready var portLE = $PortLineEdit
 @onready var nameLE = $NameLineEdit
 
+var is_game_started = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	multiplayer.peer_connected.connect(_peer_connected)
@@ -25,6 +27,11 @@ func _peer_connected(player_id):
 	#if you're connecting to anything you are already either server or client. meaning your name and id are locked in.
 	print("User "+ str(player_id) + " Connected")
 	await get_tree().create_timer(1).timeout
+	
+	#if game already started, dont accept new clients
+	if multiplayer.is_server() and is_game_started:
+		peer.disconnect_peer(player_id)
+		return
 	
 	var myid = multiplayer.get_unique_id()
 	rpc_id(player_id, "add_me", myid, nameLE.get_text())

@@ -81,6 +81,7 @@ offset_left = 384.0
 offset_top = 64.0
 offset_right = 512.0
 offset_bottom = 104.0
+disabled = true
 
 [node name="MechanicLabel" type="Label" parent="."]
 layout_mode = 0
