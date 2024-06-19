@@ -6,3 +6,45 @@
 script = ExtResource("1_aykfa")
 
 [node name="PlatformSprite2D" type="Sprite2D" parent="."]
+
+[node name="HitTicksLabel" type="Label" parent="."]
+offset_left = 512.0
+offset_top = 592.0
+offset_right = 586.0
+offset_bottom = 615.0
+text = "Hit Ticks: "
+
+[node name="HitCounterLabel" type="Label" parent="."]
+offset_left = 592.0
+offset_top = 592.0
+offset_right = 632.0
+offset_bottom = 615.0
+text = "0"
+
+[node name="SprintCDLabel" type="Label" parent="."]
+offset_left = 360.0
+offset_top = 608.0
+offset_right = 438.0
+offset_bottom = 631.0
+text = "SprintCD: "
+
+[node name="SprintDurationLabel" type="Label" parent="."]
+offset_left = 304.0
+offset_top = 584.0
+offset_right = 428.0
+offset_bottom = 607.0
+text = "Sprint Duration:"
+
+[node name="SprintCDValLabel" type="Label" parent="."]
+offset_left = 436.0
+offset_top = 608.0
+offset_right = 476.0
+offset_bottom = 631.0
+text = "0"
+
+[node name="SprintDurationValLabel" type="Label" parent="."]
+offset_left = 432.0
+offset_top = 584.0
+offset_right = 472.0
+offset_bottom = 607.0
+text = "0"

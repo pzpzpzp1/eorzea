@@ -1,12 +1,14 @@
 extends Area2D
 
 const BASE_SPEED = 150
+const SPRINT_MULT = 2 #1.25 # actual
 
 var display_name = ""
 var player_id = -1
 var network_id = -1
 var player_role_enum = -1
 var Enums = load("res://Scenes/Main/Enums.gd")
+var is_sprinting = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -65,9 +67,14 @@ func _process(delta):
 		if Input.is_action_pressed("move_up"):
 			velocity.y -= 1
 		if Input.is_action_pressed("sprint"):
-			pass
+			if $SprintCooldownTimer.time_left == 0:
+				is_sprinting = true
+				$SprintCooldownTimer.start()
+				$SprintDurationTimer.start()
 		if velocity.length() > 0:
 			velocity = velocity.normalized() * BASE_SPEED
+		if is_sprinting:
+			velocity *= SPRINT_MULT
 		
 		position += velocity * delta
 		position = position.clamp(Vector2.ZERO, get_viewport_rect().size)
@@ -77,3 +84,6 @@ func _process(delta):
 @rpc("unreliable")
 func remote_set_position(pos):
 	position = pos
+
+func _on_sprint_duration_timer_timeout():
+	is_sprinting = false

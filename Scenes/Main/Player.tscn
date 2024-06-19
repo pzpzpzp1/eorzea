@@ -21,3 +21,13 @@ shape = SubResource("CircleShape2D_ed5hf")
 [node name="BoldBorderSprite2D" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("2_w1a0b")
+
+[node name="SprintDurationTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="SprintCooldownTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
+[connection signal="timeout" from="SprintDurationTimer" to="." method="_on_sprint_duration_timer_timeout"]
