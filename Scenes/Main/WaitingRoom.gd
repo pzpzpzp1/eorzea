@@ -8,7 +8,8 @@ extends Control
 @onready var MechanicOptions = $MechanicOptionsButton
 @onready var status_text = $StatusLabel
 
-var mechanics = ["randomBS"]
+var Enums = preload("res://Scenes/Main/Enums.gd")
+#var mechanics = ["randomBS"]
 var light_party_roles = ["T1","H1","M1","R1"]
 var full_party_roles = ["T1","T2","H1","H2","M1","M2","R1","R2"]
 
@@ -18,7 +19,7 @@ var player_roles = {}
 var party_type = -1
 var player_labels = {}
 
-var Enums = preload("res://Scenes/Main/Enums.gd")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,10 +31,10 @@ func _ready():
 		$MechanicOptionsButton.hide()
 		$MechanicLabel.hide()
 	
-	for mechanic_index in mechanics.size():
-		var mechanic = mechanics[mechanic_index]
+	for mechanic in Enums.Mechanics:
+		var mechanic_index = Enums.Mechanics[mechanic]
 		MechanicOptions.add_item(mechanic, mechanic_index)
-	MechanicOptions.select(-1)
+	MechanicOptions.select(0)
 	
 func set_party_type(id):
 	party_type = id
@@ -134,7 +135,7 @@ func start_game():
 	#get_tree().get_root().get_child(0).peer.close() # no work :( 
 	var platform = load("res://Scenes/Main/Platform.tscn").instantiate()
 	get_tree().get_root().add_child(platform)
-	platform.initialize(player_ids, player_names, resolve_player_role_enums(player_roles, party_type))
+	platform.initialize(player_ids, player_names, resolve_player_role_enums(player_roles, party_type), MechanicOptions.get_selected_id())
 	platform.show()
 	hide()
 

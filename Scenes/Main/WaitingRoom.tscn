@@ -87,8 +87,8 @@ disabled = true
 layout_mode = 0
 offset_left = 384.0
 offset_top = 40.0
-offset_right = 448.0
-offset_bottom = 63.0
+offset_right = 458.0
+offset_bottom = 64.0
 text = "Mechanic"
 
 [connection signal="item_selected" from="RoleOptionsButton" to="." method="_on_role_options_button_item_selected"]

@@ -12,7 +12,7 @@ var local_player_character
 func _ready():
 	pass # Replace with function body.
 
-func initialize(player_ids, player_name_dict, player_role_enum_dict):
+func initialize(player_ids, player_name_dict, player_role_enum_dict, mechanic_enum):
 	network_id = player_ids[0] # my network id is the first in the list.
 	for id in player_ids:
 		var player = preload("res://Scenes/Main/Player.tscn").instantiate()

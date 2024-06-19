@@ -6,6 +6,10 @@ enum Roles {
 enum Party {
 	LIGHT_PARTY, FULL_PARTY
 }
+enum Mechanics {
+	RandomBS1,
+	RandomBS2
+}
 
 static func string_to_enum(enum_string, enumtype):
 	if enumtype.has(enum_string):
