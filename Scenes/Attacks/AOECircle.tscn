@@ -6,7 +6,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_2fwsy"]
 radius = 16.0
 
-[node name="AoeCircle" type="Area2D"]
+[node name="AoeCircle" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
 script = ExtResource("1_brep2")
 
 [node name="TelegraphStartTimeTimer" type="Timer" parent="."]

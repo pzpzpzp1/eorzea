@@ -5,6 +5,6 @@
 		"telegraph_start_time" : 1,
 		"damage_start_reltime" : 1,
 		"damage_duration": 10,
-		"radius": 5,
+		"radius_mult": 5,
 	}
 ]

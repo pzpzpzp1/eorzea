@@ -19,8 +19,11 @@ func initialize(player_ids, player_name_dict, player_role_enum_dict, mechanic_en
 	network_id = player_ids[0] # my network id is the first in the list.
 	for id in player_ids:
 		var player = preload("res://Scenes/Main/Player.tscn").instantiate()
+		print(player.get_node("BodyCollisionShape2D"))
+		print(player.get_node("BodyCollisionShape2D").shape)
 		player.initialize(id, player_name_dict[str(id)], player_role_enum_dict[str(id)], network_id)
 		add_child(player)
+		print(player.get_node("BodyCollisionShape2D").shape)
 		if id == network_id:
 			local_player_character = player
 	print(str(network_id) + " finished initializing players!")

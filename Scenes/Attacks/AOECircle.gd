@@ -1,4 +1,4 @@
-extends Area2D
+extends RigidBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,12 +10,10 @@ func initialize(attack_data):
 	$TelegraphStartTimeTimer.wait_time =  attack_data["telegraph_start_time"]
 	$DamageStartReltimeTimer.wait_time = attack_data["damage_start_reltime"]
 	$DamageDurationTimer.wait_time = attack_data["damage_duration"]
-	$Sprite2D.scale = Vector2(attack_data["radius"], attack_data["radius"])
+	$Sprite2D.scale = Vector2(attack_data["radius_mult"], attack_data["radius_mult"])
 	$Sprite2D.hide()
-	$CollisionShape2D.shape.radius *= attack_data["radius"]
-	
-	$CollisionShape2D.position.x = attack_data["position"][0]
-	$CollisionShape2D.position.y = attack_data["position"][1]
+	$Sprite2D.z_index = -3
+	$CollisionShape2D.shape.radius *= attack_data["radius_mult"] # DO NOT EDIT SCALE 
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

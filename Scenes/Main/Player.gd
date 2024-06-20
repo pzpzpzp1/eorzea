@@ -15,6 +15,7 @@ func _ready():
 	randomize()
 	position.x = 320 + (randi() % 100) - 50
 	position.y = 512 + (randi() % 100) - 50
+	pass
 
 
 func _on_body_entered(body):
@@ -25,12 +26,12 @@ func _on_body_entered(body):
 
 func initialize(id, displayname, role_enum, network_id):
 	#print("Initializing " + str(id) + " Name: " + displayname + " Role: " + str(role_enum))
-	$BodySprite2D.z_index = 5 # players pretty high up. Probs above all mechanics.
+	$BodySprite2D.z_index = -2 # players pretty high up. Probs above all mechanics.
 	if id == network_id:
 		# show highlight on self
 		$BoldBorderSprite2D.show()
-		$BodySprite2D.z_index = 10 # self above all else
-		$BoldBorderSprite2D.z_index = 10
+		$BodySprite2D.z_index = -1 # self above all else
+		$BoldBorderSprite2D.z_index = -1
 	
 	# set globals
 	display_name = displayname
@@ -67,6 +68,10 @@ func initialize(id, displayname, role_enum, network_id):
 func _process(delta):
 	# Is the master of the paddle.
 	if is_multiplayer_authority():
+		#print(str(get_node("BodyCollisionShape2D").shape) + str(randi()))
+		#get_node("BodyCollisionShape2D").z_index = 11
+		#print(str(get_node("BodyCollisionShape2D").z_index))
+		#$BodySprite2D.hide()
 		var velocity = Vector2.ZERO # The player's movement vector.
 		if Input.is_action_pressed("move_right"):
 			velocity.x += 1
