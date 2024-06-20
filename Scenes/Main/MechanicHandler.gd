@@ -25,7 +25,7 @@ static func build_mechanic(mech_data):
 	
 static func build_attack(attack_data):
 	var attack_name = attack_data["mechanic_obj_type"]
-	var attack = load("res://Scenes/Attacks/" + attack_name + ".tscn").instantiate()
+	var attack = load("res://Scenes/Attacks/" + attack_name + "/" + attack_name + ".tscn").instantiate()
 	attack.initialize(attack_data)
 	return attack 
 	

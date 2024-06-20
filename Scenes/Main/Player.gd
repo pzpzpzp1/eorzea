@@ -9,6 +9,8 @@ var network_id = -1
 var player_role_enum = -1
 var Enums = load("res://Scenes/Main/Enums.gd")
 var is_sprinting = false
+var hits = 0
+var is_local_player = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,12 +19,8 @@ func _ready():
 	position.y = 512 + (randi() % 100) - 50
 	pass
 
-
-func _on_body_entered(body):
-	print("hit")
-	#hit.emit()
-	#$BodyCollisionShape2D.set_deferred("disabled", true) # Replace with function body.
-
+func take_hit():
+	hits += 1
 
 func initialize(id, displayname, role_enum, network_id):
 	#print("Initializing " + str(id) + " Name: " + displayname + " Role: " + str(role_enum))
@@ -32,6 +30,7 @@ func initialize(id, displayname, role_enum, network_id):
 		$BoldBorderSprite2D.show()
 		$BodySprite2D.z_index = -1 # self above all else
 		$BoldBorderSprite2D.z_index = -1
+		is_local_player = true
 	
 	# set globals
 	display_name = displayname

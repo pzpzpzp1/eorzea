@@ -1,14 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://c26fiyefkj77j"]
 
-[ext_resource type="Script" path="res://Scenes/Attacks/AOECircle.gd" id="1_brep2"]
-[ext_resource type="Texture2D" uid="uid://cbrow1xg5s7jq" path="res://Assets/AOECircle.png" id="2_s272c"]
+[ext_resource type="Script" path="res://Scenes/Attacks/AOECircle/AOECircle.gd" id="1_brep2"]
+[ext_resource type="Texture2D" uid="uid://bjlijoxhs3tp2" path="res://Scenes/Attacks/AOECircle/AOECircleInactive.png" id="2_38wmw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2fwsy"]
+resource_local_to_scene = true
 radius = 16.0
 
-[node name="AoeCircle" type="RigidBody2D"]
-collision_mask = 0
-gravity_scale = 0.0
+[node name="AoeCircle" type="Area2D"]
 script = ExtResource("1_brep2")
 
 [node name="TelegraphStartTimeTimer" type="Timer" parent="."]
@@ -21,12 +20,18 @@ one_shot = true
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_s272c")
+texture = ExtResource("2_38wmw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2fwsy")
 disabled = true
 
+[node name="DamageTickTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="timeout" from="TelegraphStartTimeTimer" to="." method="_on_telegraph_start_time_timer_timeout"]
 [connection signal="timeout" from="DamageStartReltimeTimer" to="." method="_on_damage_start_reltime_timer_timeout"]
 [connection signal="timeout" from="DamageDurationTimer" to="." method="_on_damage_duration_timer_timeout"]
+[connection signal="timeout" from="DamageTickTimer" to="." method="_on_damage_tick_timer_timeout"]

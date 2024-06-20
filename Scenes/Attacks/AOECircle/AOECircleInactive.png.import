@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbrow1xg5s7jq"
-path="res://.godot/imported/AOECircle.png-aabde52699f525cc4c98bb782d31a69c.ctex"
+uid="uid://bjlijoxhs3tp2"
+path="res://.godot/imported/AOECircleInactive.png-f6370c6d352968baba1b252ff4d471b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/AOECircle.png"
-dest_files=["res://.godot/imported/AOECircle.png-aabde52699f525cc4c98bb782d31a69c.ctex"]
+source_file="res://Scenes/Attacks/AOECircle/AOECircleInactive.png"
+dest_files=["res://.godot/imported/AOECircleInactive.png-f6370c6d352968baba1b252ff4d471b2.ctex"]
 
 [params]
 

@@ -10,6 +10,7 @@ radius = 8.0
 load_path = "res://.godot/imported/icon.svg-8193eb3d66a1b5143b8bb4c28c1dc139.ctex"
 
 [node name="Player" type="Area2D"]
+collision_mask = 0
 script = ExtResource("1_v2ut8")
 
 [node name="BodyCollisionShape2D" type="CollisionShape2D" parent="."]
@@ -30,5 +31,4 @@ one_shot = true
 wait_time = 60.0
 one_shot = true
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="SprintDurationTimer" to="." method="_on_sprint_duration_timer_timeout"]

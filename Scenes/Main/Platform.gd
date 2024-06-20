@@ -29,12 +29,13 @@ func initialize(player_ids, player_name_dict, player_role_enum_dict, mechanic_en
 	print(str(network_id) + " finished initializing players!")
 	
 	# LOAD MECHANIC ONTO PLATFORM
-	print("here"+str(mechanic_enum))
 	var mechanic = MechanicHandler.mechanic_handler(mechanic_enum)
 	add_child(mechanic)
+	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):	
+func _process(delta):
 	$SprintCDValLabel.set_text(str(int(local_player_character.get_node("SprintCooldownTimer").time_left)))
 	$SprintDurationValLabel.set_text(str(int(local_player_character.get_node("SprintDurationTimer").time_left)))
+	$HitCounterLabel.set_text(str(int(local_player_character.hits)))
 	pass
