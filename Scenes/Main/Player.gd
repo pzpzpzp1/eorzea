@@ -16,11 +16,21 @@ func _ready():
 	position.x = 320 + (randi() % 100) - 50
 	position.y = 512 + (randi() % 100) - 50
 
+
+func _on_body_entered(body):
+	print("hit")
+	#hit.emit()
+	#$BodyCollisionShape2D.set_deferred("disabled", true) # Replace with function body.
+
+
 func initialize(id, displayname, role_enum, network_id):
 	#print("Initializing " + str(id) + " Name: " + displayname + " Role: " + str(role_enum))
+	$BodySprite2D.z_index = 5 # players pretty high up. Probs above all mechanics.
 	if id == network_id:
 		# show highlight on self
 		$BoldBorderSprite2D.show()
+		$BodySprite2D.z_index = 10 # self above all else
+		$BoldBorderSprite2D.z_index = 10
 	
 	# set globals
 	display_name = displayname
@@ -29,21 +39,21 @@ func initialize(id, displayname, role_enum, network_id):
 	network_id = network_id
 	
 	if role_enum == Enums.Roles.T1:
-		$BodySprite2D.texture = load("res://Assets/T1.png")
+		$BodySprite2D.texture = preload("res://Assets/T1.png")
 	elif role_enum == Enums.Roles.T2:
-		$BodySprite2D.texture = load("res://Assets/T2.png")
+		$BodySprite2D.texture = preload("res://Assets/T2.png")
 	elif role_enum == Enums.Roles.H1:
-		$BodySprite2D.texture = load("res://Assets/H1.png")
+		$BodySprite2D.texture = preload("res://Assets/H1.png")
 	elif role_enum == Enums.Roles.H2:
-		$BodySprite2D.texture = load("res://Assets/H2.png")
+		$BodySprite2D.texture = preload("res://Assets/H2.png")
 	elif role_enum == Enums.Roles.M1:
-		$BodySprite2D.texture = load("res://Assets/M1.png")
+		$BodySprite2D.texture = preload("res://Assets/M1.png")
 	elif role_enum == Enums.Roles.M2:
-		$BodySprite2D.texture = load("res://Assets/M2.png")
+		$BodySprite2D.texture = preload("res://Assets/M2.png")
 	elif role_enum == Enums.Roles.R1:
-		$BodySprite2D.texture = load("res://Assets/R1.png")
+		$BodySprite2D.texture = preload("res://Assets/R1.png")
 	elif role_enum == Enums.Roles.R2:
-		$BodySprite2D.texture = load("res://Assets/R2.png")
+		$BodySprite2D.texture = preload("res://Assets/R2.png")
 	else:
 		assert(false, "unexpected role.")
 	

@@ -1,0 +1,10 @@
+[
+	{
+		"mechanic_obj_type": "AOECircle",
+		"position" : [300, 450],
+		"telegraph_start_time" : 1,
+		"damage_start_reltime" : 1,
+		"damage_duration": 10,
+		"radius": 5,
+	}
+]

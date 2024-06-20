@@ -5,12 +5,15 @@ var player_names = {}
 var player_role_enums = {}
 var network_id = -1
 
-var Enums = load("res://Scenes/Main/Enums.gd")
+var Enums = preload("res://Scenes/Main/Enums.gd")
+var MechanicHandler = preload("res://Scenes/Main/MechanicHandler.gd")
 var local_player_character
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if get_tree().current_scene == self:
+		print("Debugging Platform scene.")
+		initialize([1], {"1":"nam"}, {"1":Enums.Roles.T1}, Enums.Mechanics.RandomBS1)
 
 func initialize(player_ids, player_name_dict, player_role_enum_dict, mechanic_enum):
 	network_id = player_ids[0] # my network id is the first in the list.
@@ -21,7 +24,12 @@ func initialize(player_ids, player_name_dict, player_role_enum_dict, mechanic_en
 		if id == network_id:
 			local_player_character = player
 	print(str(network_id) + " finished initializing players!")
-
+	
+	# LOAD MECHANIC ONTO PLATFORM
+	print("here"+str(mechanic_enum))
+	var mechanic = MechanicHandler.mechanic_handler(mechanic_enum)
+	add_child(mechanic)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):	
 	$SprintCDValLabel.set_text(str(int(local_player_character.get_node("SprintCooldownTimer").time_left)))
