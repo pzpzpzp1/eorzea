@@ -28,11 +28,11 @@ func initialize(player_ids, player_name_dict, player_role_enum_dict, mechanic_en
 	print(str(network_id) + " finished initializing players!")
 	
 	# LOAD MECHANIC ONTO PLATFORM
+	# Need Server to load add mechanic to tree, and rpc it onto tree for all clients. That way it's re-synchronized per attack.
 	var mechanic = MechanicHandler.mechanic_handler(mechanic_enum, players)
 	add_child(mechanic)
 	pass
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
 	$SprintCDValLabel.set_text(str(int(local_player_character.get_node("SprintCooldownTimer").time_left)))
 	$SprintDurationValLabel.set_text(str(int(local_player_character.get_node("SprintDurationTimer").time_left)))

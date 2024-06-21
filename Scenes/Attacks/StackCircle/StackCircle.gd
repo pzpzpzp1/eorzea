@@ -1,4 +1,5 @@
 extends Area2D
+# NOT QUITE THE SAME AS IN FFXIV. YOU CAN STAND IN MULTIPLE STACKS AND BE FINE. ITS FOR MECHANIC PRACTICE.
 
 var Enums = preload("res://Scenes/Main/Enums.gd")
 var collided_local_player = null
@@ -13,14 +14,17 @@ var DamageTickTimer_wait_time = 0
 func _ready():
 	$TelegraphStartTimeTimer.start()
 
+@rpc("any_peer", "call_remote")
 func set_target_player(target_priority):
-	target_player = players[randi()%players.size()]
+	# Haven't figured out synchronized random so can't randomly pick
+	# target_player = players[randi()%players.size()]
 	for role_string in target_priority:
 		var role_enum = Enums.Roles[role_string]
 		for player in players:
 			if player.player_role_enum == role_enum:
 				target_player = player 
 				return
+	assert(target_player != null, "target_player should be set by now.")
 				
 func initialize(attack_data, players_arg):
 	players = players_arg
