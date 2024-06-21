@@ -60,8 +60,6 @@ func add_previously_connected_player_characters(player_ids, player_names):
 	for index in player_ids.size(): 
 		waitingroom.add_player(player_ids[index], player_names[index])
 	
-	
-
 func _peer_disconnected(player_id):
 	print("User "+ str(player_id) + " Disconnected")
 

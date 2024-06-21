@@ -8,6 +8,7 @@ var network_id = -1
 var Enums = preload("res://Scenes/Main/Enums.gd")
 var MechanicHandler = preload("res://Scenes/Main/MechanicHandler.gd")
 var local_player_character
+var players = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,17 +20,15 @@ func initialize(player_ids, player_name_dict, player_role_enum_dict, mechanic_en
 	network_id = player_ids[0] # my network id is the first in the list.
 	for id in player_ids:
 		var player = preload("res://Scenes/Main/Player.tscn").instantiate()
-		print(player.get_node("BodyCollisionShape2D"))
-		print(player.get_node("BodyCollisionShape2D").shape)
 		player.initialize(id, player_name_dict[str(id)], player_role_enum_dict[str(id)], network_id)
 		add_child(player)
-		print(player.get_node("BodyCollisionShape2D").shape)
 		if id == network_id:
 			local_player_character = player
+		players.append(player)
 	print(str(network_id) + " finished initializing players!")
 	
 	# LOAD MECHANIC ONTO PLATFORM
-	var mechanic = MechanicHandler.mechanic_handler(mechanic_enum)
+	var mechanic = MechanicHandler.mechanic_handler(mechanic_enum, players)
 	add_child(mechanic)
 	pass
 	

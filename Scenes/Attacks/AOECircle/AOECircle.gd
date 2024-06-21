@@ -6,7 +6,7 @@ var collided_local_player = null
 func _ready():
 	$TelegraphStartTimeTimer.start()
 
-func initialize(attack_data):
+func initialize(attack_data, players):
 	position.x = attack_data["position"][0]
 	position.y = attack_data["position"][1]
 	$TelegraphStartTimeTimer.wait_time =  attack_data["telegraph_start_time"]
@@ -49,7 +49,8 @@ func _on_area_entered(area):
 		collided_local_player = area
 
 func _on_area_exited(area):
-	collided_local_player = null
+	if "is_local_player" in area and area.is_local_player:
+		collided_local_player = null
 
 func _on_damage_tick_timer_timeout():
 	if collided_local_player != null:

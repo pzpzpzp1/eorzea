@@ -1,29 +1,21 @@
 [
 	{
+		"mechanic_obj_type": "StackCircle",
+		"target_priority": ["T1","M2","R2"],
+		"min_needed_to_soak": 2,
+		"telegraph_start_time" : 2,
+		"damage_start_reltime" : 1,
+		"damage_duration": 20,
+		"damage_tick_time": 0.1,
+		"radius_mult": 5,
+	},
+	{
 		"mechanic_obj_type": "AOECircle",
 		"position" : [300, 450],
-		"telegraph_start_time" : 1,
+		"telegraph_start_time" : 10,
 		"damage_start_reltime" : 1,
 		"damage_duration": 30,
 		"damage_tick_time": 2,
 		"radius_mult": 5,
 	},
-	{
-		"mechanic_obj_type": "AOECircle",
-		"position" : [300, 550],
-		"telegraph_start_time" : 2,
-		"damage_start_reltime" : 2,
-		"damage_duration": 15,
-		"damage_tick_time": 0.5,
-		"radius_mult": 2,
-	},
-	{
-		"mechanic_obj_type": "AOECircle",
-		"position" : [200, 550],
-		"telegraph_start_time" : 2,
-		"damage_start_reltime" : 2,
-		"damage_duration": 15,
-		"damage_tick_time": 0.5,
-		"radius_mult": 2,
-	}
 ]

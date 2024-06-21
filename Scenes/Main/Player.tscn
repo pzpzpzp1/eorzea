@@ -10,6 +10,7 @@ radius = 8.0
 load_path = "res://.godot/imported/icon.svg-8193eb3d66a1b5143b8bb4c28c1dc139.ctex"
 
 [node name="Player" type="Area2D"]
+collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_v2ut8")
 
